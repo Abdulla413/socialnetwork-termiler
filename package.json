@@ -4,7 +4,7 @@
     "description": "",
     "main": "server/server.js",
     "scripts": {
-        "build": "webpack --output-public-path=/build/dist --mode production",
+        "build": "webpack --mode production",
         "dev:client": "webpack serve --mode development",
         "dev:server": "nodemon --watch server --ignore server/uploads server/server.js",
         "dev": "concurrently \"npm:dev:*\" --kill-others",

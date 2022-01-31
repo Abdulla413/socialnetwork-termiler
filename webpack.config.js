@@ -16,6 +16,7 @@ module.exports = () => ({
         hints: false,
     },
     devServer: {
+        writeToDisk: true,
         contentBase: path.join(__dirname, "client", "public"),
         proxy: {
             "/": {
@@ -33,7 +34,8 @@ module.exports = () => ({
             {
                 test: /\.js$/,
                 loader: "babel-loader",
-            }, {
+            },
+            {
                 test: /\.css$/i,
                 use: [
                     MiniCssExtractPlugin.loader,
@@ -55,7 +57,9 @@ module.exports = () => ({
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
     },
-    plugins: [new MiniCssExtractPlugin({
-        filename: 'bundle.css',
-    })],
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: "bundle.css",
+        }),
+    ],
 });
