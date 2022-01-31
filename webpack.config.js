@@ -9,7 +9,8 @@ module.exports = () => ({
         path.join(__dirname, "client", "src", "start.js"),
     ],
     output: {
-        path: path.join(__dirname, "client", "public"),
+        // path: path.join(__dirname, "client", "public"),
+        path: path.resolve(__dirname, "dist"),
         filename: "bundle.js",
     },
     performance: {
@@ -17,7 +18,8 @@ module.exports = () => ({
     },
     devServer: {
         writeToDisk: true,
-        contentBase: path.join(__dirname, "client", "public"),
+        // contentBase: path.join(__dirname, "client", "public"),
+        contentBase: "./dist",
         proxy: {
             "/": {
                 target: "http://localhost:3001",
