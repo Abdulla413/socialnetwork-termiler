@@ -51,8 +51,8 @@ app.use((req, res, next) => {
 
 app.use(compression());
 
-app.use(express.static(path.join(__dirname, "..", "client", "public")));
-// app.use(express.static(__dirname + "/dist"));
+// app.use(express.static(path.join(__dirname, "..", "client", "public")));
+app.use(express.static(__dirname + "/dist"));
 
 app.get("/user/id.json", (req, res) => {
     res.json({ userId: req.session.userId });
@@ -97,7 +97,7 @@ app.use(routerOfFriendsWannabes);
 app.use(routerOfDeleteAll);
 
 app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "..", "client", "index.html"));
+    res.sendFile(path.join(__dirname + "/dist"));
 });
 
 server.listen(process.env.PORT || 3001, function () {
