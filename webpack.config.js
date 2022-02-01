@@ -1,6 +1,5 @@
 const path = require("path");
-
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = () => ({
     entry: [
@@ -8,11 +7,12 @@ module.exports = () => ({
         path.join(__dirname, "client", "style.css"),
         path.join(__dirname, "client", "src", "start.js"),
     ],
+    mode: 'production',
     output: {
         // path: path.join(__dirname, "client", "public"),
         path: path.resolve(__dirname, "dist"),
-        publicPath: "./",
         filename: "bundle.js",
+        clean: true
     },
     performance: {
         hints: false,
@@ -32,37 +32,12 @@ module.exports = () => ({
         },
         port: "3000",
     },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: "babel-loader",
-            },
-            {
-                test: /\.css$/i,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: "css-loader",
-                        options: {
-                            url: false,
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.tsx?$/,
-                use: "ts-loader",
-                exclude: /node_modules/,
-            },
-        ],
-    },
     resolve: {
         extensions: [".tsx", ".ts", ".js"],
     },
     plugins: [
-        new MiniCssExtractPlugin({
-            filename: "bundle.css",
+        new HtmlWebpackPlugin({
+            title: 'Production',
         }),
     ],
 });
