@@ -51,8 +51,8 @@ app.use((req, res, next) => {
 
 app.use(compression());
 
-// app.use(express.static(path.join(__dirname, "..", "client", "public")));
-app.use(express.static(__dirname + "/dist"));
+app.use(express.static(path.join(__dirname, "..", "client", "public")));
+// app.use(express.static(__dirname + "/dist"));
 
 app.get("/user/id.json", (req, res) => {
     res.json({ userId: req.session.userId });
