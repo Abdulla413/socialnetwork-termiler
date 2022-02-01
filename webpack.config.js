@@ -40,4 +40,28 @@ module.exports = () => ({
             title: 'Production',
         }),
     ],
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                loader: "babel-loader",
+            },
+            {
+                test: /\.css$/i,
+                use: [
+                    {
+                        loader: "css-loader",
+                        options: {
+                            url: false,
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.tsx?$/,
+                use: "ts-loader",
+                exclude: /node_modules/,
+            },
+        ],
+    },
 });
