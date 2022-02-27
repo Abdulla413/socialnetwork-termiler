@@ -2,9 +2,11 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
+import PropTypes from "prop-types";
 
-const Register = (props) => {
-  const [formData, setFormmData] = useState({
+const Register = ({ setAlert, register }) => {
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
@@ -12,15 +14,15 @@ const Register = (props) => {
   });
   const { name, email, password, password2 } = formData;
   const onChange = (e) =>
-    setFormmData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== password2) {
-      console.log("Password do not match");
+      setAlert("Password do not match", "danger");
     } else {
-      console.log("Succsess");
+      register({ name, email, password });
     }
   };
   return (
@@ -37,7 +39,6 @@ const Register = (props) => {
             name="name"
             value={name}
             onChange={(e) => onChange(e)}
-            required
           />
         </div>
         <div className="form-group">
@@ -47,7 +48,6 @@ const Register = (props) => {
             name="email"
             value={email}
             onChange={(e) => onChange(e)}
-            required
           />
           <small className="form-text">
             This site uses Gravatar so if you want a profile image, use a
@@ -59,7 +59,6 @@ const Register = (props) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6"
             value={password}
             onChange={(e) => onChange(e)}
           />
@@ -69,7 +68,6 @@ const Register = (props) => {
             type="password"
             placeholder="Confirm Password"
             name="password2"
-            minLength="6"
             value={password2}
             onChange={(e) => onChange(e)}
           />
@@ -83,4 +81,9 @@ const Register = (props) => {
   );
 };
 
-export default connect(null, { setAlert })(Register);
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert, register })(Register);
